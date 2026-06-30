@@ -1,0 +1,64 @@
+.desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.desktop-icons {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    bottom: 56px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    gap: 12px 16px;
+
+    max-height: calc(100vh - 72px);
+}
+
+.desktop-icon {
+    width: 90px;
+    height: 88px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    user-select: none;
+
+    padding: 4px;
+}
+
+.desktop-icon:hover {
+    background: rgba(255,255,255,.25);
+}
+
+.desktop-icon.selected {
+    background: rgba(120,160,255,.55);
+    outline: 1px dotted #000;
+}
+
+.desktop-icon-image {
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 8px;
+
+    image-rendering: pixelated;
+}
+
+.desktop-icon span {
+    text-align: center;
+
+    font-size: 20px;
+
+    color: #222;
+}

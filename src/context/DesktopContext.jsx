@@ -3,12 +3,13 @@ import { createContext, useContext, useState } from "react";
 const DesktopContext = createContext();
 
 export function DesktopProvider({ children }) {
-  const [windows] = useState([]);
+  const [selectedIcon, setSelectedIcon] = useState(null);
 
   return (
     <DesktopContext.Provider
       value={{
-        windows,
+        selectedIcon,
+        setSelectedIcon,
       }}
     >
       {children}
