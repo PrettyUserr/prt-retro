@@ -2,19 +2,17 @@ import Wallpaper from "../Wallpaper/Wallpaper";
 import Taskbar from "../Taskbar/Taskbar";
 import DesktopIcon from "../DesktopIcon/DesktopIcon";
 
+import apps from "../../registry/apps";
+
 function Desktop() {
   return (
     <div className="desktop">
       <Wallpaper />
 
       <div className="desktop-icons">
-        <DesktopIcon icon="📁" label="About" />
-
-        <DesktopIcon icon="💻" label="Projects" />
-
-        <DesktopIcon icon="📄" label="Resume" />
-
-        <DesktopIcon icon="📬" label="Contact" />
+        {apps.map((app) => (
+          <DesktopIcon key={app.id} icon={app.icon} label={app.title} />
+        ))}
       </div>
 
       <Taskbar />

@@ -1,7 +1,7 @@
 function DesktopIcon({ icon, label }) {
   return (
     <div className="desktop-icon">
-      <div className="desktop-icon-image">{icon}</div>
+      <img src={icon} alt={label} className="desktop-icon-image" />
 
       <span>{label}</span>
     </div>

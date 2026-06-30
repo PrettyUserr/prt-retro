@@ -62,7 +62,10 @@ body{
 }
 
 .desktop-icon-image{
-    font-size:42px;
+    width:48px;
+    height:48px;
+    image-rendering:pixelated;
+    margin-bottom:8px;
 }
 
 .desktop-icon span{
