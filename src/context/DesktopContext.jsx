@@ -63,16 +63,22 @@ export function DesktopProvider({ children }) {
     });
   };
 
+  const moveWindow = (id, x, y) => {
+    setOpenWindows((prev) =>
+      prev.map((window) => (window.id === id ? { ...window, x, y } : window)),
+    );
+  };
+
   return (
     <DesktopContext.Provider
       value={{
         selectedIcon,
         setSelectedIcon,
-
         openWindows,
         openWindow,
         closeWindow,
         focusWindow,
+        moveWindow,
       }}
     >
       {children}
