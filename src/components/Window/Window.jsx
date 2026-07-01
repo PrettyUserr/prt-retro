@@ -5,49 +5,48 @@ function Window({ id, title, x, y, z, children }) {
   const { closeWindow, bringToFront, moveWindow, minimizeWindow } =
     useDesktop();
 
-  const dragData = useRef({
+  const drag = useRef({
     dragging: false,
     offsetX: 0,
     offsetY: 0,
   });
 
-  const startDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    bringToFront(id);
-
-    dragData.current.dragging = true;
-    dragData.current.offsetX = e.clientX - x;
-    dragData.current.offsetY = e.clientY - y;
-
-    window.addEventListener("mousemove", onDrag);
-    window.addEventListener("mouseup", stopDrag);
-  };
-
-  const onDrag = (e) => {
-    if (!dragData.current.dragging) return;
+  const handleMouseMove = (e) => {
+    if (!drag.current.dragging) return;
 
     moveWindow(
       id,
-      e.clientX - dragData.current.offsetX,
-      e.clientY - dragData.current.offsetY,
+      e.clientX - drag.current.offsetX,
+      e.clientY - drag.current.offsetY,
     );
   };
 
-  const stopDrag = () => {
-    dragData.current.dragging = false;
+  const handleMouseUp = () => {
+    drag.current.dragging = false;
 
-    window.removeEventListener("mousemove", onDrag);
-    window.removeEventListener("mouseup", stopDrag);
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  const startDrag = (e) => {
+    e.preventDefault();
+
+    bringToFront(id);
+
+    drag.current.dragging = true;
+    drag.current.offsetX = e.clientX - x;
+    drag.current.offsetY = e.clientY - y;
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
   };
 
   return (
     <div
       className="window"
       style={{
-        left: `${x}px`,
-        top: `${y}px`,
+        left: x,
+        top: y,
         zIndex: z,
       }}
       onMouseDown={() => bringToFront(id)}
@@ -63,7 +62,11 @@ function Window({ id, title, x, y, z, children }) {
             }}
             title="Minimize"
           >
-            —
+            _
+          </button>
+
+          <button disabled title="Maximize (coming soon)">
+            □
           </button>
 
           <button
@@ -73,7 +76,7 @@ function Window({ id, title, x, y, z, children }) {
             }}
             title="Close"
           >
-            ×
+            ✕
           </button>
         </div>
       </div>

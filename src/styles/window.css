@@ -2,59 +2,83 @@
   position: absolute;
 
   width: 560px;
-  min-height: 380px;
+  height: 380px;
 
-  background: #ffe8f3;
+  display: flex;
+  flex-direction: column;
 
-  border: 3px solid black;
+  background: #fff7fb;
 
-  box-shadow: 6px 6px 0 black;
+  border: 3px solid #000;
+
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.18);
 
   overflow: hidden;
 
-  user-select: none;
+  image-rendering: pixelated;
 }
 
 .window-titlebar {
   height: 34px;
 
-  background: #f6a9cf;
-
-  border-bottom: 3px solid black;
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 
   padding: 0 8px;
 
+  background: #ef8db8;
+
+  border-bottom: 3px solid black;
+
   cursor: grab;
 
-  font-family: "Press Start 2P";
+  user-select: none;
 
+  font-family: "Press Start 2P";
   font-size: 10px;
+
+  color: white;
 }
 
 .window-titlebar:active {
   cursor: grabbing;
 }
 
-.window-titlebar button {
-  width: 24px;
+.window-buttons {
+  display: flex;
+  gap: 4px;
+}
 
-  height: 24px;
+.window-buttons button {
+  width: 22px;
+  height: 22px;
+
+  padding: 0;
 
   border: 2px solid black;
 
-  background: white;
+  background: #ffd5e8;
+
+  font-family: "Press Start 2P";
+  font-size: 9px;
 
   cursor: pointer;
+}
 
-  font-weight: bold;
+.window-buttons button:hover {
+  background: white;
 }
 
 .window-content {
+  flex: 1;
+
   padding: 16px;
+
+  overflow: auto;
+
+  font-family: "VT323";
+  font-size: 28px;
+
+  color: #222;
 }

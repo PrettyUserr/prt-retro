@@ -1,0 +1,159 @@
+.about-app{
+    padding:18px;
+
+    font-family:"VT323";
+
+    font-size:24px;
+
+    color:#222;
+
+    background:#fff8fc;
+
+    height:100%;
+
+    overflow:auto;
+}
+
+.profile-header{
+
+    display:flex;
+
+    gap:22px;
+
+    align-items:flex-start;
+}
+
+.profile-avatar{
+
+    width:170px;
+
+    image-rendering:pixelated;
+
+    border:3px solid black;
+
+    background:#ffd8eb;
+
+    flex-shrink:0;
+}
+
+.profile-info h1{
+
+    font-family:"Press Start 2P";
+
+    font-size:14px;
+
+    margin-bottom:20px;
+
+    color:#d85b91;
+}
+
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:130px 1fr;
+
+    gap:10px 18px;
+}
+
+.profile-grid span:nth-child(odd){
+
+    font-weight:bold;
+}
+
+.online{
+
+    color:#26a626;
+}
+
+.divider{
+
+    height:3px;
+
+    background:black;
+
+    margin:22px 0;
+}
+
+.about-app h2{
+
+    font-family:"Press Start 2P";
+
+    font-size:13px;
+
+    margin-bottom:14px;
+
+    color:#d85b91;
+}
+
+.about-app p{
+
+    line-height:1.4;
+}
+
+.skills{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+}
+
+.skills span{
+
+    border:2px solid black;
+
+    background:#ffd7ea;
+
+    padding:4px 12px;
+}
+
+.links{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+}
+
+.links a{
+
+    text-decoration:none;
+
+    color:black;
+
+    border:2px solid black;
+
+    background:#ffe6f2;
+
+    padding:8px 14px;
+
+    transition:.15s;
+}
+
+.links a:hover{
+
+    background:#f6b5d6;
+}
+
+@media(max-width:700px){
+
+.profile-header{
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+.profile-grid{
+
+    grid-template-columns:100px 1fr;
+}
+
+.profile-avatar{
+
+    width:140px;
+}
+}
