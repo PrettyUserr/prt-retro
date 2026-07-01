@@ -1,52 +1,39 @@
-.desktop-icon{
+.desktop-icon {
+    width: 96px;
+    height: 96px;
 
-    width:92px;
-    height:100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 
-    display:flex;
+    cursor: pointer;
+    user-select: none;
 
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    padding:6px;
+    padding: 6px;
 }
 
-.desktop-icon:hover{
-
-    background:rgba(255,255,255,.18);
+.desktop-icon:hover {
+    background: rgba(255,255,255,.18);
 }
 
-.desktop-icon.selected{
-
-    background:#9cc5ff99;
-
-    outline:1px dotted black;
+.desktop-icon.selected {
+    background: rgba(115, 170, 255, .45);
+    outline: 1px dotted #000;
 }
 
-.desktop-icon-image{
+.desktop-icon-image {
+    width: 56px;
+    height: 56px;
 
-    width:52px;
-    height:52px;
+    image-rendering: pixelated;
 
-    image-rendering:pixelated;
-
-    margin-bottom:8px;
+    margin-bottom: 6px;
 }
 
-.desktop-icon span{
-
-    font-size:22px;
-
-    text-align:center;
-
-    color:#222;
-
-    line-height:1.1;
+.desktop-icon span {
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.1;
+    color: #222;
 }

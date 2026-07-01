@@ -1,28 +1,21 @@
-.desktop{
-    position:fixed;
-    inset:0;
-
-    width:100vw;
-    height:100vh;
-
-    overflow:hidden;
+.desktop {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
 }
 
-.desktop-icons{
+.desktop-icons {
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    right: 20px;
+    bottom: 70px;
 
-    position:absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 
-    top:18px;
-    left:18px;
-    bottom:58px;
+    align-content: flex-start;
 
-    display:grid;
-
-    grid-auto-flow:column;
-
-    grid-template-rows:repeat(8,110px);
-
-    grid-auto-columns:110px;
-
-    column-gap:10px;
+    gap: 18px 36px;
 }
