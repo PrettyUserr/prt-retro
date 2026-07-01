@@ -1,48 +1,51 @@
 .window {
     position: absolute;
 
-    top: 120px;
+    top: 110px;
     left: 220px;
 
-    width: 480px;
+    width: 520px;
+    min-height: 320px;
 
-    background: #ffe6f1;
+    background: #ffeaf4;
 
     border: 3px solid #000;
 
     box-shadow: 6px 6px 0 #000;
 
-    z-index: 50;
+    overflow: hidden;
 }
 
 .window-titlebar {
-    height: 36px;
+    height: 34px;
 
-    background: #f6a8cf;
+    background: #f5a9cf;
 
     border-bottom: 3px solid #000;
 
     display: flex;
-
+    align-items: center;
     justify-content: space-between;
 
-    align-items: center;
-
-    padding: 0 10px;
+    padding: 0 8px;
 
     font-family: "Press Start 2P";
     font-size: 10px;
 }
 
-.window-titlebar button {
-    width: 26px;
-    height: 26px;
+.window-titlebar span {
+    user-select: none;
+}
 
-    cursor: pointer;
+.window-titlebar button {
+    width: 24px;
+    height: 24px;
 
     border: 2px solid #000;
 
     background: white;
+
+    cursor: pointer;
 
     font-weight: bold;
 }
