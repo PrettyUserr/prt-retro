@@ -21,6 +21,7 @@ function Desktop() {
             id={app.id}
             icon={app.icon}
             label={app.title}
+            app={app}
           />
         ))}
       </div>

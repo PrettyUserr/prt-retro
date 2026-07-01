@@ -4,31 +4,27 @@ const DesktopContext = createContext();
 
 export function DesktopProvider({ children }) {
   const [selectedIcon, setSelectedIcon] = useState(null);
-
   const [openWindows, setOpenWindows] = useState([]);
 
-  function openWindow(app) {
-    setOpenWindows((current) => {
-      const exists = current.find((window) => window.id === app.id);
-
-      if (exists) {
-        return current;
+  const openWindow = (app) => {
+    setOpenWindows((prev) => {
+      if (prev.some((window) => window.id === app.id)) {
+        return prev;
       }
 
-      return [...current, app];
+      return [...prev, app];
     });
-  }
+  };
 
-  function closeWindow(id) {
-    setOpenWindows((current) => current.filter((window) => window.id !== id));
-  }
+  const closeWindow = (id) => {
+    setOpenWindows((prev) => prev.filter((window) => window.id !== id));
+  };
 
   return (
     <DesktopContext.Provider
       value={{
         selectedIcon,
         setSelectedIcon,
-
         openWindows,
         openWindow,
         closeWindow,

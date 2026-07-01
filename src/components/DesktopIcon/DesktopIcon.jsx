@@ -1,36 +1,25 @@
-import Wallpaper from "../Wallpaper/Wallpaper";
-import Taskbar from "../Taskbar/Taskbar";
-import DesktopIcon from "../DesktopIcon/DesktopIcon";
-import WindowManager from "../WindowManager/WindowManager";
-
 import { useDesktop } from "../../context/DesktopContext";
 
-import apps from "../../registry/apps";
-
-function Desktop() {
-  const { setSelectedIcon } = useDesktop();
+function DesktopIcon({ id, icon, label, app }) {
+  const { selectedIcon, setSelectedIcon, openWindow } = useDesktop();
 
   return (
-    <div className="desktop" onClick={() => setSelectedIcon(null)}>
-      <Wallpaper />
+    <div
+      className={`desktop-icon ${selectedIcon === id ? "selected" : ""}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedIcon(id);
+      }}
+      onDoubleClick={(e) => {
+        e.stopPropagation();
+        openWindow(app);
+      }}
+    >
+      <img src={icon} alt={label} className="desktop-icon-image" />
 
-      <div className="desktop-icons">
-        {apps.map((app) => (
-          <DesktopIcon
-            key={app.id}
-            id={app.id}
-            icon={app.icon}
-            label={app.title}
-            app={app}
-          />
-        ))}
-      </div>
-
-      <WindowManager />
-
-      <Taskbar />
+      <span>{label}</span>
     </div>
   );
 }
 
-export default Desktop;
+export default DesktopIcon;

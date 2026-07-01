@@ -1,5 +1,5 @@
-import Window from "../Window/Window";
 import { useDesktop } from "../../context/DesktopContext";
+import Window from "../Window/Window";
 
 function WindowManager() {
   const { openWindows } = useDesktop();
@@ -7,11 +7,11 @@ function WindowManager() {
   return (
     <>
       {openWindows.map((app) => {
-        const Component = app.component;
+        const AppComponent = app.component;
 
         return (
           <Window key={app.id} id={app.id} title={app.title}>
-            <Component />
+            <AppComponent />
           </Window>
         );
       })}
