@@ -1,6 +1,7 @@
 import Wallpaper from "../Wallpaper/Wallpaper";
 import Taskbar from "../Taskbar/Taskbar";
 import DesktopIcon from "../DesktopIcon/DesktopIcon";
+import WindowManager from "../WindowManager/WindowManager";
 
 import { useDesktop } from "../../context/DesktopContext";
 
@@ -23,6 +24,8 @@ function Desktop() {
           />
         ))}
       </div>
+
+      <WindowManager />
 
       <Taskbar />
     </div>

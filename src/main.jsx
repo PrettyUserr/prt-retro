@@ -9,6 +9,7 @@ import "./styles/desktop.css";
 import "./styles/icons.css";
 import "./styles/taskbar.css";
 import "./styles/wallpaper.css";
+import "./styles/window.css";
 
 import App from "./App";
 import { DesktopProvider } from "./context/DesktopContext";

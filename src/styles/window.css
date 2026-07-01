@@ -1,0 +1,52 @@
+.window {
+    position: absolute;
+
+    top: 120px;
+    left: 220px;
+
+    width: 480px;
+
+    background: #ffe6f1;
+
+    border: 3px solid #000;
+
+    box-shadow: 6px 6px 0 #000;
+
+    z-index: 50;
+}
+
+.window-titlebar {
+    height: 36px;
+
+    background: #f6a8cf;
+
+    border-bottom: 3px solid #000;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 10px;
+
+    font-family: "Press Start 2P";
+    font-size: 10px;
+}
+
+.window-titlebar button {
+    width: 26px;
+    height: 26px;
+
+    cursor: pointer;
+
+    border: 2px solid #000;
+
+    background: white;
+
+    font-weight: bold;
+}
+
+.window-content {
+    padding: 18px;
+}
