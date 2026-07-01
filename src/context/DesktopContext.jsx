@@ -13,60 +13,93 @@ export function DesktopProvider({ children }) {
   const [openWindows, setOpenWindows] = useState([]);
   const [highestZ, setHighestZ] = useState(START_Z_INDEX);
 
+  const bringToFront = (id) => {
+    setHighestZ((prevZ) => {
+      const nextZ = prevZ + 1;
+
+      setOpenWindows((prevWindows) =>
+        prevWindows.map((window) =>
+          window.id === id
+            ? {
+                ...window,
+                z: nextZ,
+                minimized: false,
+              }
+            : window,
+        ),
+      );
+
+      return nextZ;
+    });
+  };
+
   const openWindow = (app) => {
-    setOpenWindows((prev) => {
-      const existing = prev.find((window) => window.id === app.id);
+    const existing = openWindows.find((window) => window.id === app.id);
 
-      if (existing) {
-        return prev.map((window) =>
-          window.id === app.id ? { ...window, z: highestZ + 1 } : window,
-        );
-      }
+    if (existing) {
+      bringToFront(app.id);
+      return;
+    }
 
-      const count = prev.length;
+    const offset = openWindows.length * CASCADE_OFFSET;
 
-      const x = (window.innerWidth - WINDOW_WIDTH) / 2 + count * CASCADE_OFFSET;
+    const x = (window.innerWidth - WINDOW_WIDTH) / 2 + offset;
 
-      const y =
-        (window.innerHeight - WINDOW_HEIGHT) / 2 + count * CASCADE_OFFSET;
+    const y = (window.innerHeight - WINDOW_HEIGHT) / 2 + offset;
 
-      return [
-        ...prev,
+    setHighestZ((prevZ) => {
+      const nextZ = prevZ + 1;
+
+      setOpenWindows((prevWindows) => [
+        ...prevWindows,
         {
           ...app,
           x,
           y,
-          z: highestZ + 1,
+          z: nextZ,
           minimized: false,
         },
-      ];
-    });
+      ]);
 
-    setHighestZ((z) => z + 1);
+      return nextZ;
+    });
   };
 
   const closeWindow = (id) => {
-    setOpenWindows((prev) => prev.filter((window) => window.id !== id));
-  };
-
-  const focusWindow = (id) => {
-    setHighestZ((prev) => {
-      const next = prev + 1;
-
-      setOpenWindows((windows) =>
-        windows.map((window) =>
-          window.id === id ? { ...window, z: next } : window,
-        ),
-      );
-
-      return next;
-    });
+    setOpenWindows((prevWindows) =>
+      prevWindows.filter((window) => window.id !== id),
+    );
   };
 
   const moveWindow = (id, x, y) => {
-    setOpenWindows((prev) =>
-      prev.map((window) => (window.id === id ? { ...window, x, y } : window)),
+    setOpenWindows((prevWindows) =>
+      prevWindows.map((window) =>
+        window.id === id
+          ? {
+              ...window,
+              x,
+              y,
+            }
+          : window,
+      ),
     );
+  };
+
+  const minimizeWindow = (id) => {
+    setOpenWindows((prevWindows) =>
+      prevWindows.map((window) =>
+        window.id === id
+          ? {
+              ...window,
+              minimized: true,
+            }
+          : window,
+      ),
+    );
+  };
+
+  const restoreWindow = (id) => {
+    bringToFront(id);
   };
 
   return (
@@ -74,11 +107,19 @@ export function DesktopProvider({ children }) {
       value={{
         selectedIcon,
         setSelectedIcon,
+
         openWindows,
+
         openWindow,
         closeWindow,
-        focusWindow,
+
+        bringToFront,
+
         moveWindow,
+
+        minimizeWindow,
+
+        restoreWindow,
       }}
     >
       {children}

@@ -1,34 +1,41 @@
-import { useEffect, useState } from "react";
+import { useDesktop } from "../../context/DesktopContext";
 
 function Taskbar() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-
-      setTime(
-        now.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      );
-    };
-
-    updateClock();
-
-    const interval = setInterval(updateClock, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const { openWindows, restoreWindow } = useDesktop();
 
   return (
     <footer className="taskbar">
-      <button className="start-button">Start</button>
+      <div className="taskbar-left">
+        <button className="start-button">🌸 Petal</button>
 
-      <div className="taskbar-spacer"></div>
+        <div className="taskbar-apps">
+          {openWindows.map((window) => (
+            <button
+              key={window.id}
+              className={`taskbar-app ${
+                window.minimized ? "minimized" : "active"
+              }`}
+              onClick={() => restoreWindow(window.id)}
+            >
+              <img
+                src={window.icon}
+                alt={window.title}
+                width={18}
+                height={18}
+              />
 
-      <div className="clock">{time}</div>
+              <span>{window.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="taskbar-right">
+        {new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
+      </div>
     </footer>
   );
 }

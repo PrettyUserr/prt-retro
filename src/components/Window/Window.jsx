@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { useDesktop } from "../../context/DesktopContext";
 
 function Window({ id, title, x, y, z, children }) {
-  const { closeWindow, focusWindow, moveWindow } = useDesktop();
+  const { closeWindow, bringToFront, moveWindow, minimizeWindow } =
+    useDesktop();
 
   const dragData = useRef({
     dragging: false,
@@ -12,8 +13,9 @@ function Window({ id, title, x, y, z, children }) {
 
   const startDrag = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
-    focusWindow(id);
+    bringToFront(id);
 
     dragData.current.dragging = true;
     dragData.current.offsetX = e.clientX - x;
@@ -48,19 +50,32 @@ function Window({ id, title, x, y, z, children }) {
         top: `${y}px`,
         zIndex: z,
       }}
-      onMouseDown={() => focusWindow(id)}
+      onMouseDown={() => bringToFront(id)}
     >
       <div className="window-titlebar" onMouseDown={startDrag}>
         <span>{title}</span>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            closeWindow(id);
-          }}
-        >
-          ×
-        </button>
+        <div className="window-buttons">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              minimizeWindow(id);
+            }}
+            title="Minimize"
+          >
+            —
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              closeWindow(id);
+            }}
+            title="Close"
+          >
+            ×
+          </button>
+        </div>
       </div>
 
       <div className="window-content">{children}</div>
