@@ -6,9 +6,11 @@ import "@fontsource/press-start-2p";
 
 import "./styles/globals.css";
 import "./styles/desktop.css";
+import "./styles/icons.css";
+import "./styles/taskbar.css";
+import "./styles/wallpaper.css";
 
 import App from "./App";
-
 import { DesktopProvider } from "./context/DesktopContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

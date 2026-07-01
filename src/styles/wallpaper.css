@@ -1,0 +1,22 @@
+.wallpaper{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+
+        45deg,
+
+        #f8d3e8 0px,
+
+        #f8d3e8 18px,
+
+        #f3bfdc 18px,
+
+        #f3bfdc 36px
+
+    );
+}
