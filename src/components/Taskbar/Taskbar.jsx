@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDesktop } from "../../context/DesktopContext";
 
 function Taskbar() {
@@ -23,13 +23,25 @@ function Taskbar() {
     return () => clearInterval(interval);
   }, []);
 
+  // Remove accidental duplicates
+  const taskbarWindows = useMemo(() => {
+    const seen = new Set();
+
+    return openWindows.filter((window) => {
+      if (seen.has(window.id)) return false;
+
+      seen.add(window.id);
+      return true;
+    });
+  }, [openWindows]);
+
   return (
     <footer className="taskbar">
       <div className="taskbar-left">
         <button className="start-button">🌸 Petal</button>
 
         <div className="taskbar-apps">
-          {openWindows.map((window) => (
+          {taskbarWindows.map((window) => (
             <button
               key={window.id}
               className={`taskbar-app ${window.minimized ? "minimized" : ""}`}

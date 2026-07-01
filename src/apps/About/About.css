@@ -1,159 +1,259 @@
-.about-app{
-    padding:18px;
-
-    font-family:"VT323";
-
-    font-size:24px;
-
-    color:#222;
-
-    background:#fff8fc;
-
-    height:100%;
-
-    overflow:auto;
+.about {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fff8fc;
 }
 
-.profile-header{
+/* ================= Tabs ================= */
 
-    display:flex;
-
-    gap:22px;
-
-    align-items:flex-start;
+.about-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 8px 8px 0;
+  background: #ffdceb;
+  border-bottom: 2px solid #000;
 }
 
-.profile-avatar{
-
-    width:170px;
-
-    image-rendering:pixelated;
-
-    border:3px solid black;
-
-    background:#ffd8eb;
-
-    flex-shrink:0;
+.tab {
+  border: 2px solid #000;
+  border-bottom: none;
+  background: #ffeaf4;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-family: "Press Start 2P";
+  font-size: 8px;
+  transition: 0.15s;
 }
 
-.profile-info h1{
-
-    font-family:"Press Start 2P";
-
-    font-size:14px;
-
-    margin-bottom:20px;
-
-    color:#d85b91;
+.tab:hover {
+  background: #fff;
 }
 
-.profile-grid{
-
-    display:grid;
-
-    grid-template-columns:130px 1fr;
-
-    gap:10px 18px;
+.tab.active {
+  background: #fff;
+  transform: translateY(2px);
 }
 
-.profile-grid span:nth-child(odd){
+/* ================= Body ================= */
 
-    font-weight:bold;
+.about-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
 }
 
-.online{
+/* ================= Profile ================= */
 
-    color:#26a626;
+.profile-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+
+  border: 2px solid #000;
+  background: white;
+
+  padding: 16px;
+}
+.avatar-frame {
+  width: 110px;
+  height: 110px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid black;
+
+  background: #ffe6f2;
+}
+/* Avatar frame */
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+
+  object-fit: cover;
+
+  image-rendering: pixelated;
+
+  border: 3px solid black;
+
+  background: #ffd7e8;
+
+  padding: 3px;
 }
 
-.divider{
+/* Right side */
 
-    height:3px;
+.profile-info h2 {
+  margin: 0 0 14px;
 
-    background:black;
+  color: #d45b90;
 
-    margin:22px 0;
+  font-family: "Press Start 2P";
+  font-size: 11px;
 }
 
-.about-app h2{
+.profile-grid {
+  display: grid;
 
-    font-family:"Press Start 2P";
+  grid-template-columns: 90px 1fr;
 
-    font-size:13px;
+  row-gap: 8px;
 
-    margin-bottom:14px;
+  column-gap: 12px;
 
-    color:#d85b91;
+  font-size: 24px;
 }
 
-.about-app p{
-
-    line-height:1.4;
+.profile-grid span:nth-child(odd) {
+  font-weight: bold;
 }
 
-.skills{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
+.online {
+  color: #18b518;
 }
 
-.skills span{
+/* ================= About ================= */
 
-    border:2px solid black;
+.about-panel {
+  margin-top: 18px;
 
-    background:#ffd7ea;
+  border: 2px solid black;
 
-    padding:4px 12px;
+  background: white;
+
+  padding: 16px;
+
+  position: relative;
 }
 
-.links{
+.about-panel h3 {
+  position: absolute;
 
-    display:flex;
+  top: -11px;
 
-    gap:12px;
+  left: 12px;
 
-    flex-wrap:wrap;
+  background: #fff8fc;
+
+  padding: 0 8px;
+
+  font-size: 10px;
+
+  font-family: "Press Start 2P";
+
+  color: #d45b90;
 }
 
-.links a{
+.about-panel p {
+  margin: 12px 0;
 
-    text-decoration:none;
-
-    color:black;
-
-    border:2px solid black;
-
-    background:#ffe6f2;
-
-    padding:8px 14px;
-
-    transition:.15s;
+  line-height: 1.5;
 }
 
-.links a:hover{
+/* ================= Status ================= */
 
-    background:#f6b5d6;
+.about-status {
+  height: 28px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 12px;
+
+  border-top: 2px solid black;
+
+  background: #ffe6f2;
+
+  font-size: 22px;
+}
+/* ================= Skills ================= */
+
+/* =======================
+   Skills (Control Panel)
+======================= */
+
+.control-panel {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-top: 12px;
 }
 
-@media(max-width:700px){
+.control-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.profile-header{
+  gap: 10px;
 
-    flex-direction:column;
+  padding: 12px;
 
-    align-items:center;
+  border: 2px solid transparent;
+
+  cursor: pointer;
+
+  transition: 0.15s ease;
 }
 
-.profile-grid{
+.control-item:hover {
+  border-color: black;
 
-    grid-template-columns:100px 1fr;
+  background: #ffe4f2;
 }
 
-.profile-avatar{
-
-    width:140px;
+.control-icon {
+  font-size: 34px;
 }
+
+.control-item span {
+  text-align: center;
+
+  font-size: 20px;
+}
+
+/* ================= Links ================= */
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link-list a {
+  text-decoration: none;
+  color: black;
+
+  border: 2px solid black;
+
+  background: white;
+
+  padding: 10px 14px;
+}
+
+.link-list a:hover {
+  background: #ffe4f1;
+}
+
+/* ================= System ================= */
+
+.system-grid {
+  display: grid;
+
+  grid-template-columns: 170px 1fr;
+
+  row-gap: 12px;
+
+  column-gap: 18px;
+}
+
+.system-grid span:nth-child(odd) {
+  font-weight: bold;
 }

@@ -1,87 +1,58 @@
+import { useState } from "react";
 import "./About.css";
 
+import General from "./tabs/General";
+import Skills from "./tabs/Skills";
+import Links from "./tabs/Links";
+import System from "./tabs/System";
+
 function About() {
+  const [activeTab, setActiveTab] = useState("general");
+
+  const tabs = [
+    { id: "general", label: "General" },
+    { id: "skills", label: "Skills" },
+    { id: "links", label: "Links" },
+    { id: "system", label: "System" },
+  ];
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case "skills":
+        return <Skills />;
+
+      case "links":
+        return <Links />;
+
+      case "system":
+        return <System />;
+
+      default:
+        return <General />;
+    }
+  };
+
   return (
-    <div className="about-app">
-      <div className="profile-header">
-        <img src="/avatar.png" alt="Ibukun" className="profile-avatar" />
-
-        <div className="profile-info">
-          <h1>SYSTEM PROFILE</h1>
-
-          <div className="profile-grid">
-            <span>User</span>
-            <span>PrtUsr</span>
-
-            <span>Name</span>
-            <span>Ibukun Olaniyan</span>
-
-            <span>Role</span>
-            <span>Cloud Security Engineer</span>
-
-            <span>Status</span>
-            <span className="online">● Online</span>
-
-            <span>Mission</span>
-            <span>Build. Learn. Ship.</span>
-
-            <span>Location</span>
-            <span>/home/prtusr</span>
-          </div>
-        </div>
+    <div className="about">
+      <div className="about-tabs">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={activeTab === tab.id ? "tab active" : "tab"}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
-      <div className="divider" />
+      <div className="about-body">{renderTab()}</div>
 
-      <h2>ABOUT</h2>
+      <footer className="about-status">
+        <span>PetalOS v1.0</span>
 
-      <p>
-        Hi! I'm Ibukun, also known online as <strong>PrtUsr</strong>. I'm a
-        Cloud Security Engineer in training with a background in frontend
-        development, technical writing, project management, and research. I
-        enjoy building practical software, exploring cloud technologies,
-        documenting what I learn, and creating experiences that feel both useful
-        and fun.
-      </p>
-
-      <div className="divider" />
-
-      <h2>INSTALLED MODULES</h2>
-
-      <div className="skills">
-        <span>Linux</span>
-        <span>React</span>
-        <span>Python</span>
-        <span>Git</span>
-        <span>Cloud</span>
-        <span>Research</span>
-        <span>Writing</span>
-        <span>AI</span>
-      </div>
-
-      <div className="divider" />
-
-      <div className="links">
-        <a
-          href="https://github.com/PrettyUserr"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub.exe
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/ibukun-olaniyan/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          LinkedIn.exe
-        </a>
-
-        <a href="https://x.com/prtusr?s=20" target="_blank" rel="noreferrer">
-          X.exe
-        </a>
-      </div>
+        <span> Running...</span>
+      </footer>
     </div>
   );
 }

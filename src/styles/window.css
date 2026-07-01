@@ -9,9 +9,15 @@
 
   background: #fff7fb;
 
-  border: 3px solid #000;
+    border: 2px solid black;
 
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.18);
+  outline: 2px solid white;
+
+  outline-offset: -5px;
+
+  box-shadow:
+    5px 5px 0 #000,
+    9px 9px 0 rgba(0,0,0,.18);
 
   overflow: hidden;
 
@@ -22,23 +28,31 @@
   height: 34px;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 8px;
 
-  background: #ef8db8;
+  background: linear-gradient(
+    to right,
+    #d85b91,
+    #ef8db8,
+    #ffc3dd
+  );
 
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid #000;
 
   cursor: grab;
-
   user-select: none;
+
+  flex-shrink: 0;
 
   font-family: "Press Start 2P";
   font-size: 10px;
 
   color: white;
+
+  text-shadow: 1px 1px black;
 }
 
 .window-titlebar:active {
@@ -54,18 +68,31 @@
   width: 22px;
   height: 22px;
 
+  border: 2px solid #000;
+
+  background: #ffe6f2;
+
   padding: 0;
 
-  border: 2px solid black;
-
-  background: #ffd5e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   font-family: "Press Start 2P";
-  font-size: 9px;
+  font-size: 8px;
 
   cursor: pointer;
+
+  transition: .08s;
 }
 
+.window-buttons button:hover {
+  background: white;
+}
+
+.window-buttons button:active {
+  transform: translateY(1px);
+}
 .window-buttons button:hover {
   background: white;
 }
@@ -73,12 +100,28 @@
 .window-content {
   flex: 1;
 
-  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  overflow: auto;
+  padding: 16px;
 
   font-family: "VT323";
   font-size: 28px;
 
   color: #222;
+}
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.window {
+  animation: windowOpen .18s ease-out;
 }

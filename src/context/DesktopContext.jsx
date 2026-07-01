@@ -14,18 +14,18 @@ export function DesktopProvider({ children }) {
   const [highestZ, setHighestZ] = useState(START_Z_INDEX);
 
   const bringToFront = (id) => {
-    setHighestZ((prevZ) => {
-      const nextZ = prevZ + 1;
+    setHighestZ((prev) => {
+      const nextZ = prev + 1;
 
-      setOpenWindows((prevWindows) =>
-        prevWindows.map((window) =>
-          window.id === id
+      setOpenWindows((windows) =>
+        windows.map((win) =>
+          win.id === id
             ? {
-                ...window,
+                ...win,
                 z: nextZ,
                 minimized: false,
               }
-            : window,
+            : win,
         ),
       );
 
@@ -34,75 +34,59 @@ export function DesktopProvider({ children }) {
   };
 
   const openWindow = (app) => {
-    setHighestZ((prevZ) => {
-      const nextZ = prevZ + 1;
+    const existing = openWindows.find((win) => win.id === app.id);
 
-      setOpenWindows((prevWindows) => {
-        const existing = prevWindows.find((window) => window.id === app.id);
+    if (existing) {
+      bringToFront(app.id);
+      return;
+    }
 
-        if (existing) {
-          return prevWindows.map((window) =>
-            window.id === app.id
-              ? {
-                  ...window,
-                  z: nextZ,
-                  minimized: false,
-                }
-              : window,
-          );
-        }
+    const offset = openWindows.length * CASCADE_OFFSET;
 
-        const offset = prevWindows.length * CASCADE_OFFSET;
+    const desktopWidth = window.innerWidth;
+    const desktopHeight = window.innerHeight - 54;
 
-        const x = (window.innerWidth - WINDOW_WIDTH) / 2 + offset;
+    const x = Math.max(
+      40,
+      Math.round((desktopWidth - WINDOW_WIDTH) / 2 + offset),
+    );
 
-        const y = (window.innerHeight - WINDOW_HEIGHT) / 2 + offset;
+    const y = Math.max(
+      40,
+      Math.round((desktopHeight - WINDOW_HEIGHT) / 2 + offset),
+    );
 
-        return [
-          ...prevWindows,
-          {
-            ...app,
-            x,
-            y,
-            z: nextZ,
-            minimized: false,
-          },
-        ];
-      });
+    setHighestZ((prev) => {
+      const nextZ = prev + 1;
+
+      setOpenWindows((windows) => [
+        ...windows,
+        {
+          ...app,
+          x,
+          y,
+          z: nextZ,
+          minimized: false,
+        },
+      ]);
 
       return nextZ;
     });
   };
 
   const closeWindow = (id) => {
-    setOpenWindows((prevWindows) =>
-      prevWindows.filter((window) => window.id !== id),
-    );
-  };
-
-  const moveWindow = (id, x, y) => {
-    setOpenWindows((prevWindows) =>
-      prevWindows.map((window) =>
-        window.id === id
-          ? {
-              ...window,
-              x,
-              y,
-            }
-          : window,
-      ),
-    );
+    setOpenWindows((windows) => windows.filter((win) => win.id !== id));
   };
 
   const minimizeWindow = (id) => {
-    setOpenWindows((prevWindows) =>
-      prevWindows.map((window) =>
-        window.id === id
+    setOpenWindows((windows) =>
+      windows.map((win) =>
+        win.id === id
           ? {
-              ...window,
+              ...win,
               minimized: true,
             }
-          : window,
+          : win,
       ),
     );
   };
@@ -111,18 +95,50 @@ export function DesktopProvider({ children }) {
     bringToFront(id);
   };
 
+  const moveWindow = (id, x, y) => {
+    const desktopWidth = window.innerWidth;
+    const desktopHeight = window.innerHeight - 54;
+
+    // Keep part of the window visible at all times
+    const minX = -WINDOW_WIDTH + 180;
+    const maxX = desktopWidth - 180;
+
+    const minY = 0;
+    const maxY = desktopHeight - 40;
+
+    const clampedX = Math.max(minX, Math.min(x, maxX));
+    const clampedY = Math.max(minY, Math.min(y, maxY));
+
+    setOpenWindows((windows) =>
+      windows.map((win) =>
+        win.id === id
+          ? {
+              ...win,
+              x: clampedX,
+              y: clampedY,
+            }
+          : win,
+      ),
+    );
+  };
+
   return (
     <DesktopContext.Provider
       value={{
         selectedIcon,
         setSelectedIcon,
+
         openWindows,
+
         openWindow,
         closeWindow,
-        bringToFront,
-        moveWindow,
+
         minimizeWindow,
         restoreWindow,
+
+        bringToFront,
+
+        moveWindow,
       }}
     >
       {children}
