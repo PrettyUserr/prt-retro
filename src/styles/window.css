@@ -1,55 +1,60 @@
 .window {
-    position: absolute;
+  position: absolute;
 
-    top: 110px;
-    left: 220px;
+  width: 560px;
+  min-height: 380px;
 
-    width: 520px;
-    min-height: 320px;
+  background: #ffe8f3;
 
-    background: #ffeaf4;
+  border: 3px solid black;
 
-    border: 3px solid #000;
+  box-shadow: 6px 6px 0 black;
 
-    box-shadow: 6px 6px 0 #000;
+  overflow: hidden;
 
-    overflow: hidden;
+  user-select: none;
 }
 
 .window-titlebar {
-    height: 34px;
+  height: 34px;
 
-    background: #f5a9cf;
+  background: #f6a9cf;
 
-    border-bottom: 3px solid #000;
+  border-bottom: 3px solid black;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
 
-    padding: 0 8px;
+  justify-content: space-between;
 
-    font-family: "Press Start 2P";
-    font-size: 10px;
+  align-items: center;
+
+  padding: 0 8px;
+
+  cursor: grab;
+
+  font-family: "Press Start 2P";
+
+  font-size: 10px;
 }
 
-.window-titlebar span {
-    user-select: none;
+.window-titlebar:active {
+  cursor: grabbing;
 }
 
 .window-titlebar button {
-    width: 24px;
-    height: 24px;
+  width: 24px;
 
-    border: 2px solid #000;
+  height: 24px;
 
-    background: white;
+  border: 2px solid black;
 
-    cursor: pointer;
+  background: white;
 
-    font-weight: bold;
+  cursor: pointer;
+
+  font-weight: bold;
 }
 
 .window-content {
-    padding: 18px;
+  padding: 16px;
 }

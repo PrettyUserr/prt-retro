@@ -1,10 +1,18 @@
 import { useDesktop } from "../../context/DesktopContext";
 
-function Window({ id, title, children }) {
-  const { closeWindow } = useDesktop();
+function Window({ id, title, x, y, z, children }) {
+  const { closeWindow, focusWindow } = useDesktop();
 
   return (
-    <div className="window">
+    <div
+      className="window"
+      style={{
+        left: `${x}px`,
+        top: `${y}px`,
+        zIndex: z,
+      }}
+      onMouseDown={() => focusWindow(id)}
+    >
       <div className="window-titlebar">
         <span>{title}</span>
 
