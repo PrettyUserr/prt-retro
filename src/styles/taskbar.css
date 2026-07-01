@@ -1,67 +1,87 @@
-.taskbar{
+.taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-    position:absolute;
+  height: 50px;
 
-    left:0;
-    right:0;
-    bottom:0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    height:54px;
+  padding: 0 8px;
 
-    background:#efb5d3;
+  background: #efb5d3;
 
-    border-top:3px solid white;
+  border-top: 3px solid #fff;
 
-    display:flex;
+  box-sizing: border-box;
 
-    align-items:center;
-
-    padding:6px 10px;
-
-    z-index:100;
+  z-index: 9999;
 }
 
-.start-button{
+/* ---------- LEFT ---------- */
 
-    width:92px;
-    height:38px;
+.taskbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-    border:3px solid black;
+  flex: 1;
 
-    background:#ffd7e8;
-
-    font-family:"Press Start 2P";
-
-    font-size:10px;
-
-    cursor:pointer;
+  overflow: hidden;
 }
 
-.taskbar-spacer{
+.start-button {
+  flex-shrink: 0;
 
-    flex:1;
+  width: 100px;
+  height: 38px;
+
+  border: 3px solid black;
+
+  background: #ffd7e8;
+
+  font-family: "Press Start 2P";
+  font-size: 10px;
+
+  cursor: pointer;
 }
 
-.clock{
-
-    min-width:110px;
-
-    text-align:center;
-
-    background:white;
-
-    border:3px solid black;
-
-    padding:4px;
-
-    font-size:24px;
+.start-button:hover {
+  background: #ffc9df;
 }
+
+/* ---------- APPS ---------- */
+
+.taskbar-apps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  flex: 1;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+}
+
+.taskbar-apps::-webkit-scrollbar {
+  display: none;
+}
+
 .taskbar-app {
   display: flex;
   align-items: center;
   gap: 6px;
 
-  padding: 4px 10px;
+  flex-shrink: 0;
+
+  height: 34px;
+
+  padding: 0 10px;
 
   border: 2px solid black;
 
@@ -70,45 +90,42 @@
   cursor: pointer;
 
   font-family: "VT323";
-  font-size: 20px;
-
-  height: 34px;
+  font-size: 22px;
 }
 
-.window-buttons {
-  display: flex;
-  gap: 4px;
-}
-.taskbar-apps {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 12px;
-}
-
-.taskbar-app {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  height: 34px;
-
-  padding: 0 10px;
-
-  border: 2px solid #000;
-
-  background: #ffe8f4;
-
-  cursor: pointer;
-
-  font-family: "VT323";
-  font-size: 20px;
-}
-
-.taskbar-app.active {
-  background: #f6b6d6;
+.taskbar-app:hover {
+  background: #ffd0e3;
 }
 
 .taskbar-app.minimized {
-  opacity: 0.7;
+  opacity: 0.55;
+}
+
+.taskbar-app-icon {
+  width: 18px;
+  height: 18px;
+
+  image-rendering: pixelated;
+}
+
+/* ---------- CLOCK ---------- */
+
+.taskbar-clock {
+  flex-shrink: 0;
+
+  width: 95px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 10px;
+
+  border: 2px solid black;
+
+  background: white;
+
+  font-family: "VT323";
+  font-size: 24px;
 }

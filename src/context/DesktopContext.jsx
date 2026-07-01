@@ -34,32 +34,41 @@ export function DesktopProvider({ children }) {
   };
 
   const openWindow = (app) => {
-    const existing = openWindows.find((window) => window.id === app.id);
-
-    if (existing) {
-      bringToFront(app.id);
-      return;
-    }
-
-    const offset = openWindows.length * CASCADE_OFFSET;
-
-    const x = (window.innerWidth - WINDOW_WIDTH) / 2 + offset;
-
-    const y = (window.innerHeight - WINDOW_HEIGHT) / 2 + offset;
-
     setHighestZ((prevZ) => {
       const nextZ = prevZ + 1;
 
-      setOpenWindows((prevWindows) => [
-        ...prevWindows,
-        {
-          ...app,
-          x,
-          y,
-          z: nextZ,
-          minimized: false,
-        },
-      ]);
+      setOpenWindows((prevWindows) => {
+        const existing = prevWindows.find((window) => window.id === app.id);
+
+        if (existing) {
+          return prevWindows.map((window) =>
+            window.id === app.id
+              ? {
+                  ...window,
+                  z: nextZ,
+                  minimized: false,
+                }
+              : window,
+          );
+        }
+
+        const offset = prevWindows.length * CASCADE_OFFSET;
+
+        const x = (window.innerWidth - WINDOW_WIDTH) / 2 + offset;
+
+        const y = (window.innerHeight - WINDOW_HEIGHT) / 2 + offset;
+
+        return [
+          ...prevWindows,
+          {
+            ...app,
+            x,
+            y,
+            z: nextZ,
+            minimized: false,
+          },
+        ];
+      });
 
       return nextZ;
     });
@@ -107,18 +116,12 @@ export function DesktopProvider({ children }) {
       value={{
         selectedIcon,
         setSelectedIcon,
-
         openWindows,
-
         openWindow,
         closeWindow,
-
         bringToFront,
-
         moveWindow,
-
         minimizeWindow,
-
         restoreWindow,
       }}
     >
